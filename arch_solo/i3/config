@@ -184,9 +184,9 @@ hide_edge_borders smart
 exec --no-startup-id nm-applet
 
 #volume
-bindsym XF86AudioRaiseVolume exec amixer set Master 2+
-bindsym XF86AudioLowerVolume exec amixer set Master 2-
-#bindsym XF86AudioMute exec 
+bindsym XF86AudioRaiseVolume exec amixer -c 0 set Master 2+
+bindsym XF86AudioLowerVolume exec amixer -c 0 set Master 2-
+bindsym XF86AudioMute exec amixer set Master toggle
 
 #brightness
 bindsym control+asterisk exec xbacklight -inc 15
