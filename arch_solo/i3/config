@@ -192,3 +192,5 @@ bindsym XF86AudioMute exec amixer set Master toggle
 bindsym control+asterisk exec xbacklight -inc 15
 bindsym control+ugrave exec xbacklight -dec 15
 
+#tap-click
+exec --no-startup-id synclient TapButton1=1
