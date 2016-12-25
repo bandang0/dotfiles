@@ -184,13 +184,13 @@ hide_edge_borders smart
 exec --no-startup-id nm-applet
 
 #volume
-bindsym XF86AudioRaiseVolume exec amixer -c 0 set Master 2+
-bindsym XF86AudioLowerVolume exec amixer -c 0 set Master 2-
-bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
 #brightness
 bindsym control+asterisk exec xbacklight -inc 15
 bindsym control+ugrave exec xbacklight -dec 15
 
-#allow tap-click from 
+#tap-click
 exec --no-startup-id synclient TapButton1=1
