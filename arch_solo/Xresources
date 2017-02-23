@@ -1,0 +1,5 @@
+XTerm*reverseVideo: on
+/* URxvt.perl-ext-common: ...,tabbed,...       */
+URxvt*scrollBar:        false
+*background: #111111
+*foreground: #BBBBBB
