@@ -3,3 +3,5 @@ XTerm*reverseVideo: on
 URxvt*scrollBar:        false
 *background: #111111
 *foreground: #BBBBBB
+*.font:xft:Monospace:pixelsize=15
+!*.letterSpace: -5
