@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ -z "$(pacmd info | grep "Default source" | grep analog)" ]; then
-	pacmd set-card-profile 0 output:analog-stereo
-else
-	pacmd set-card-profile 0 output:hdmi-stereo
-fi

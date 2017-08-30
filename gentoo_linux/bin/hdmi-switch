@@ -1,0 +1,30 @@
+#!/bin/bash
+
+switch() {
+  local screen="$(xrandr | grep primary | cut -d' ' -f1)"
+  local hdmi="$(xrandr | grep HDMI | cut -d' ' -f1)"
+  if [ -z "$(pacmd info | grep "Default source" | grep analog)" ]; then
+    echo -e "Stopping HDMI output on ${hdmi}...\n"
+    xrandr --output ${hdmi} --off
+    echo -e "Switching sound to internal speakers...\n"
+    pacmd set-card-profile 0 output:analog-stereo
+    echo -e "Testing sound on internal speakers...\n"
+    espeak "Seems to be working on internal speakers"
+  else
+    echo -e "Switching from primary screen ${screen} to ${hdmi}...\n"
+    echo -e "Setting graphics to ${hdmi}...\n"
+    xrandr --output ${screen} --auto --output ${hdmi} --auto --same-as ${screen}
+    echo -e "Switching sound to ${hdmi}...\n"
+    pacmd set-card-profile 0 output:hdmi-stereo
+    sleep 1
+    echo -e "Testing sound on HDMI...\n"
+    espeak "Seems to be working on HDMI"
+    echo -e "If you wish to shutdown the main screen while using HDMI use the following command:\n"
+    echo -e "xrandr --output ${screen} --off\n"
+  fi
+  echo -e "All done, exiting..."
+}
+
+switch
+
+exit 0
