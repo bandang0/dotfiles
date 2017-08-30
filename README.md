@@ -1,7 +1,9 @@
 # dotfiles
 
-Configuration files for Arch Linux (or other Linux) with:
+Configuration files for Gentoo Linux and Arch Linux (or other Linux).
 
-i3 
-oh-my-zsh  
-urxvt
+Usage:
+
+`./install.sh $DISTRO`
+
+where `$DISTRO` is either gentoo_linux or arch_linux.

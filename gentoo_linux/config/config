@@ -36,10 +36,10 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
-bindsym $mod+Shift+a kill
+bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -181,12 +181,12 @@ new_window pixel
 hide_edge_borders smart
 
 #nm-applet autostartup
-exec --no-startup-id nm-applet
+exec --no-startup-id wpa_gui -qt
 
 #volume
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAUlt_SINK@ toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 #brightness
 bindsym control+asterisk exec xbacklight -inc 15
@@ -194,6 +194,3 @@ bindsym control+ugrave exec xbacklight -dec 15
 
 #tap-click
 exec --no-startup-id synclient TapButton1=1
-
-#xrdb init
-exec --no-startup-id xrdb ~/.Xresources
