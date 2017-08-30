@@ -176,6 +176,9 @@ bindsym $mod+b border toggle
 # start programs with thin borders
 new_window pixel
 
+# xrdb for Xresources
+exec_always --no-startup-id xrdb ~/.Xresources
+
 #hide borders for single windows
 hide_edge_borders smart
 
