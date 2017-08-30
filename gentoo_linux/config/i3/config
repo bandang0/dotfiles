@@ -189,8 +189,11 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 #brightness
-bindsym control+asterisk exec xbacklight -inc 15
-bindsym control+ugrave exec xbacklight -dec 15
+#bindsym control+asterisk exec xbacklight -inc 15
+#bindsym control+ugrave exec xbacklight -dec 15
 
 #tap-click
 exec --no-startup-id synclient TapButton1=1
+
+#HDMI switch
+bindsym control+mod1+h exec /bin/bash /home/naganori-san/.bin/hdmi-switch
