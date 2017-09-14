@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
   echo "Script requires exactly one argument: gentoo_linux or arch_linux."
   exit 1
 fi
@@ -16,6 +16,14 @@ for file in $(ls $1); do
     cp ${1}/${file} /home/$USER/.${file}
   fi
 done
+
+ln -s ~/.irssi/scripts/smartfilter.pl ~/.irssi/scripts/autorun/smartfilter.pl
+
+if [ $# -eq 2 ]; then
+  unzip ~/.irssi/config.zip
+else
+  rm -rf ~/.irssi/config.zip
+fi
 
 echo -e "All done.\n"
 exit 0
