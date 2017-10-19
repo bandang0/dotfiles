@@ -12,6 +12,7 @@ for file in $(ls "archlinux"); do
   fi
 done
 
+mkdir -pv ~/.irssi/scripts/autorun
 ln -s ~/.irssi/scripts/smartfilter.pl ~/.irssi/scripts/autorun/smartfilter.pl 2> /dev/null
 
 echo -e "All done.\nDon't forget to set your password in the irssi config file.\n"
