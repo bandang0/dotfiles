@@ -4,6 +4,7 @@
 # Should you change your keyboard layout some time, delete
 # this file and re-run i3-config-wizard(1).
 #
+
 # WARNING
 # WARNING: This configuration file is a template for the i3-config-wizard to
 # WARNING: generate a config which uses keysyms in your current layout. It does
@@ -15,10 +16,6 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -157,12 +154,17 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status --config ~/.config/i3/i3status.conf
+        position top
+        status_command i3blocks
 }
 
 ##################################################################################
 
 # naganori-san starts here
+#
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:liberation 9
 
 #i3lock.sh
 bindsym Control+mod1+l exec sh ~/.config/i3/i3lock.sh
@@ -176,13 +178,42 @@ bindsym $mod+b border toggle
 # start programs with thin borders
 new_window pixel
 
-# xrdb for Xresources
-exec_always --no-startup-id xrdb ~/.Xresources
-
 #hide borders for single windows
 hide_edge_borders smart
 
+#wpa_gui autostartup
+exec --no-startup-id wpa_gui -qt
+
+# xrdb for rxvt-unicode
+exec_always --no-startup-id xrdb ~/.Xresources
+
 #volume
-bindysm mod1+1 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindysm mod1+2 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindysm mod1+3 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
+
+#brightness
+bindsym control+asterisk exec xbacklight -inc 15
+bindsym control+ugrave exec xbacklight -dec 15
+
+#tap-click
+exec_always --no-startup-id i=$(xinput | grep Elan | cut -d'=' -f2);xinput set-prop $(echo "${i:0:3}") $(xinput --list-props ${i:0:3} | grep "Tapping Enabled (" | cut -d'(' -f2 | cut -d')' -f1) 1
+
+#HDMI switch
+bindsym control+mod1+h exec /bin/bash /home/naganori-san/.bin/hdmi-switch
+
+# mode launcher for vlc, thunar and firefox
+set $mode_launcher Launch: [f]irefox [t]hunar [v]lc
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+  bindsym f exec firefox; mode "default"
+  bindsym t exec thunar; mode "default"
+  bindsym v exec vlc; mode "default"
+
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+
+exec --no-startup-id /home/${USER}/.bin/workspace-10
+exec_always --no-startup-id i3-msg reload

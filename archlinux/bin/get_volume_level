@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if ! [ -z "$(pacmd list-sinks | grep muted | grep no)" ]; then
+  echo "$(pacmd list-sinks | grep front-left: | cut -d '/' -f2 | tr -d [:space:])"
+else
+  echo '0%'
+fi

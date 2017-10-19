@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # icon="$HOME/.xlock/icon.png"
-tmpbg='/home/duque_g/.tmp/screen.png'
+tmpbg='/tmp/screen.png'
 
 # (( $# )) && { icon=$1; }
 
@@ -19,4 +19,4 @@ convert "$tmpbg" -scale 10% -scale 1000% "$tmpbg"
 
 # -u hides the i3lock ring :
 # i3lock -i "$tmpbg"
-i3lock -i "$tmpbg"
+i3lock -u -i  "$tmpbg"
