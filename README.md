@@ -24,3 +24,4 @@ Dependencies:
   firefox
   thunar
   vlc
+  messer

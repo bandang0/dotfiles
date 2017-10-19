@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-i3-msg "workspace 10; exec telegram; exec urxvt -e irssi"
+i3-msg "workspace 10; exec telegram; exec urxvt -e irssi; exec urxvt -e messer ~/.config/messer/config.json"
 
 sleep 10
 
