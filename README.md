@@ -1,10 +1,11 @@
 # dotfiles
 
-Configuration files for Arch Linux (or other Linux distribution using irssi and rxvt-unicode in i3wm).
+Configuration files for Fedora 26 (or other Linux distribution using irssi and rxvt-unicode in i3wm).
 
 Usage:
 
-`./install.sh`
+`./installdeps.sh` (with root privileges)
+`./install.sh` (with user shell)
 
 Dependencies:
 
@@ -20,8 +21,5 @@ Dependencies:
   feh
   scrot
   imagemagick
-  liberation fonts
   firefox
-  thunar
   vlc
-  messer

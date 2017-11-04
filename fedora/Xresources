@@ -10,9 +10,9 @@ URxvt.matcher.button: 1
 !URxvt.tabbed.tabbar-bg: 0
 !URxvt.tabbed.tab-fg: 3
 !URxvt.tabbed.tab-bg: 0
-URxvt.font: xft:liberation:size=10
-URxvt.boldfont: xft:liberation:bold:size=10
-URxvt.letterSpace: -2
+URxvt.font: xft:Monospace:pixelsize=15
+URxvt.boldfont: xft:Monospace-Bold:bold:pixelsize=15
+URxvt.letterSpace: -1 
 URxvt.keysym.F11: perl:fullscreen:switch
 
 URxvt*transparent: true

@@ -13,7 +13,6 @@ servers = (
 chatnets = {
   Freenode = {
     type = "IRC";
-    autosendcmd = "/j #archlinux";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -189,11 +188,10 @@ statusbar = {
 settings = {
   core = {
     real_name = "Unknown";
-    user_name = "naganori-san";
-    nick = "naganori-san";
+    user_name = "yourname";
+    nick = "yourname";
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
 channels = (
-  { name = "#archlinux"; chatnet = "Freenode"; autojoin = "yes"; }
 );

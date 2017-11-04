@@ -151,7 +151,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
+# Start i3bar to display a workspace bar (plus the system information i3blocks
 # finds out, if available)
 bar {
         position top
@@ -182,7 +182,7 @@ new_window pixel
 hide_edge_borders smart
 
 #wpa_gui autostartup
-exec --no-startup-id wpa_gui -qt
+exec --no-startup-id nm-applet
 
 # xrdb for rxvt-unicode
 exec_always --no-startup-id xrdb ~/.Xresources
@@ -192,23 +192,19 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pk
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
 
-#brightness
-bindsym control+asterisk exec xbacklight -inc 15
-bindsym control+ugrave exec xbacklight -dec 15
-
 #tap-click
-exec_always --no-startup-id i=$(xinput | grep Elan | cut -d'=' -f2);xinput set-prop $(echo "${i:0:3}") $(xinput --list-props ${i:0:3} | grep "Tapping Enabled (" | cut -d'(' -f2 | cut -d')' -f1) 1
+exec_always --no-startup-id i=$(xinput | grep Synaptics | cut -d'=' -f2);xinput set-prop $(echo "${i:0:3}") $(xinput --list-props ${i:0:3} | grep "Tapping Enabled (" | cut -d'(' -f2 | cut -d')' -f1) 1
 
 #HDMI switch
-bindsym control+mod1+h exec /bin/bash /home/naganori-san/.bin/hdmi-switch
+bindsym control+mod1+h exec /bin/bash /home/bandang0/.bin/hdmi-switch
 
 # mode launcher for vlc, thunar and firefox
-set $mode_launcher Launch: [f]irefox [t]hunar [v]lc
+set $mode_launcher Launch: [f]irefox [n]autilus [v]lc
 bindsym $mod+o mode "$mode_launcher"
 
 mode "$mode_launcher" {
   bindsym f exec firefox; mode "default"
-  bindsym t exec thunar; mode "default"
+  bindsym n exec nautilus; mode "default"
   bindsym v exec vlc; mode "default"
 
   bindsym Escape mode "default"
