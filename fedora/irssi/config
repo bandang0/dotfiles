@@ -13,6 +13,7 @@ servers = (
 chatnets = {
   Freenode = {
     type = "IRC";
+    autosendcmd = "/j #arcs-os";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
