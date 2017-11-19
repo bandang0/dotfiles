@@ -6,8 +6,8 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Git enabled prompt
-if [ -f ~/.bin/git-sh-prompt ]; then
-  . ~/.bin/git-sh-prompt
+if [ -f ~/.bin/git-prompt ]; then
+  . ~/.bin/git-prompt
   export GIT_PS1_SHOWDIRTYSTATE=1
   export PS1='\u@\h:\w$(__git_ps1 " (%s)")\$ '
 else
