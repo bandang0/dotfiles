@@ -15,9 +15,15 @@ done
 
 #Take care of telegram
 curl https://telegram.org/dl/desktop/linux > ~/Downloads/tsetup.tar.xz
-tar xvf ~/Downloads/tsetup.tar.xz ~/Downloads/Telegram
-cp ~/Downloads/Telegram/Telegram ~/.bin/telegram
-rm -rf ~/Downloads/Telegram
+if [ $? -eq 0 ]
+then
+   tar xvf ~/Downloads/tsetup.tar.xz ~/Downloads/Telegram
+   cp ~/Downloads/Telegram/Telegram ~/.bin/telegram
+   rm -rf ~/Downloads/Telegram
+   rm -rf ~/Downloads/tetup.tar.xz
+else
+    echo Telegram setup file not found, skipping.
+fi
 
 #Make directory for Wallpapers
 mkdir -pv ~/Pictures/Wallpapers

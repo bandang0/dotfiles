@@ -189,8 +189,8 @@ statusbar = {
 settings = {
   core = {
     real_name = "Unknown";
-    user_name = "yourname";
-    nick = "yourname";
+    user_name = "bandang0";
+    nick = "bandang0";
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
