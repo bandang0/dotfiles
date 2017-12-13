@@ -1,0 +1,40 @@
+#!/bin/bash
+# Small deamon to check and acoustically warn for low battery.
+# Ideally is launched at i3 start and never killed.
+
+# Globals
+TIME_INTERVAL=3m
+DISCHARGING=Discharging
+
+# Produces a tone with given frequency $1 and duration $2 (in sec).
+_alarm() {
+  speaker-test --frequency $1 --test sine & pid=$!
+  sleep $2
+  kill -9 $pid
+}
+
+# Produces the warning tone.
+_warn_low_battery() {
+  _alarm 200 1 &> /dev/null
+  _alarm 400 1 &> /dev/null
+  _alarm 800 1 &> /dev/null
+}
+
+# Infinite loop which check the battery level periodically and warns
+# if lower than 15% and discharging.
+while /bin/true
+do
+  sleep $TIME_INTERVAL
+  bat_percentage=$(acpi | cut -d' ' -f4)
+  bat_state=$(acpi | cut -d' ' -f3)
+
+  number=${bat_percentage:0:2}
+  state=${bat_state:0:11}
+
+  if [ $number -lt 15 ] && [ $state == $DISCHARGING ]
+  then
+    _warn_low_battery
+  fi
+done
+
+# Done.

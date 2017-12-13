@@ -160,7 +160,7 @@ bar {
 
 ##################################################################################
 
-# naganori-san starts here
+# naganori-san inspired bandang0 starts here
 #
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -183,6 +183,9 @@ hide_edge_borders smart
 
 #wpa_gui autostartup
 exec --no-startup-id nm-applet
+
+# low battery deamon
+exec --no-startup-id /home/${USER}/.bin/low-batteryd
 
 # xrdb for rxvt-unicode
 exec_always --no-startup-id xrdb ~/.Xresources
