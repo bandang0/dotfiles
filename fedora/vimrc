@@ -13,3 +13,4 @@ filetype plugin indent on
 set mouse=a
 
 set laststatus=2
+set noswapfile
