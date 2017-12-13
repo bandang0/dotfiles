@@ -15,7 +15,7 @@ done
 
 #Take care of telegram
 curl https://telegram.org/dl/desktop/linux > ~/Downloads/tsetup.tar.xz
-if [ $? -eq 0 ]
+if [ -s ~/Downloads/tsetup.tar.xz ]
 then
    tar xvf ~/Downloads/tsetup.tar.xz ~/Downloads/Telegram
    cp ~/Downloads/Telegram/Telegram ~/.bin/telegram
