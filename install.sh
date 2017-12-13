@@ -13,15 +13,13 @@ for file in $(ls "fedora"); do
   fi
 done
 
-echo -e "All done.\nDon't forget to set your password in the irssi config file.\n"
-exit 0
-
 #Take care of telegram
-curl https://telegram.org/dl/desktop/linux > ~/Downloads/tsetup.1.1.23.tar.xz
-tar xvf ~/Downloads/tsetup.1.1.23.tar.xz ~/Downloads/Telegram
+curl https://telegram.org/dl/desktop/linux > ~/Downloads/tsetup.tar.xz
+tar xvf ~/Downloads/tsetup.tar.xz ~/Downloads/Telegram
 cp ~/Downloads/Telegram/Telegram ~/.bin/telegram
-
-echo 'export PATH=~/.bin:$PATH' >> ~.bashrc
+rm -rf ~/Downloads/Telegram
 
 #Make directory for Wallpapers
 mkdir -pv ~/Pictures/Wallpapers
+
+echo -e "All done.\nDon't forget to set your password in the irssi config file.\n"
