@@ -23,3 +23,4 @@ Dependencies:
   imagemagick
   firefox
   vlc
+  python-imaging
