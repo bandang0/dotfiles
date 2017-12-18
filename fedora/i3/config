@@ -167,7 +167,7 @@ bar {
 font pango:liberation 9
 
 #i3lock.sh
-bindsym Control+mod1+l exec sh ~/.config/i3/i3lock.sh
+bindsym Control+mod1+l exec sh ~/.i3/i3lock.sh
 
 # random wallpaper from directory
 exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/Wallpapers/*
