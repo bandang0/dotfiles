@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Search for string in all files of current directory and
+# subdirectories.
+
+# Handle no-opts case
+if [ "$1" = "" ]
+then
+    echo "Usage: lgrep STRING"
+    exit 1
+fi
+
+# Search for string
+for file in $( find . -type f ) 
+do
+    if grep -q $1 $file 
+    then
+        echo -e "***** " $file
+        grep -n $1 $file
+    fi
+done

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Create an new file with executable bit on.
+
+if [ $1 = " "]
+then
+    echo -e "Usage: nf FILE"
+    exit 1
+fi
+
+touch $1
+chmod 755 $1

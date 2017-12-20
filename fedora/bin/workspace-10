@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-i3-msg "workspace 10; exec /home/bandang0/.bin/telegram; exec urxvt -e irssi"
+i3-msg "workspace 10; exec /home/bandang0/.bin/telegram;"
 
-sleep 3
+sleep 6 
 
 i3-msg "workspace 1"

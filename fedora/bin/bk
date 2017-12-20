@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This is to back-up the current directory to the home directory
+# it backs-up /path/to/somewhere/here to ~/.here.bk
+
+if [ -d ~/$( basename $( pwd ) ).bk ] ; then
+  echo -e "Back-up exists."
+  rm -r ~/$( basename $( pwd ) ).bk	#remove the current back-up
+  echo -e "Removing current back-up exited with $?. "
+else
+  echo -e "No back-up found."
+fi
+
+cp -r $( pwd ) ~/$( basename $( pwd ) ).bk	# and write a new one
+echo -e "Writing new back-up exited with $?. "
+
+# DONE
