@@ -187,6 +187,9 @@ exec --no-startup-id nm-applet
 # low battery deamon
 exec --no-startup-id /home/${USER}/.bin/low-batteryd
 
+# Dropbox syncing deamon
+exec --no-startup-id dropbox start
+
 # xrdb for rxvt-unicode
 exec_always --no-startup-id xrdb ~/.Xresources
 

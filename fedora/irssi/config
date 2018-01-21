@@ -3,7 +3,6 @@ servers = (
     address = "irc.freenode.net";
     chatnet = "Freenode";
     port = "6667";
-    password = "password";
     use_tls = "no";
     tls_verify = "no";
     autoconnect = "yes";
@@ -13,7 +12,7 @@ servers = (
 chatnets = {
   Freenode = {
     type = "IRC";
-    autosendcmd = "/j #arcs-os";
+    autosendcmd = "/join #arcs-os";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
@@ -194,5 +193,3 @@ settings = {
   };
   "fe-text" = { actlist_sort = "refnum"; };
 };
-channels = (
-);
