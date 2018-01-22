@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# This script archives and compresses all the non-git directories
+# from ~ which are not in a exclude list and puts the archive in the 
+# ~/Dropbox directory for back-up, after having checked that there is
+# enough space in there.
+
+# Globals (DB_MAX in bytes).
+DB_MAX=1900000000
+tar_name=home-$HOSTNAME-$(date -u +"%Y%m%d")
+EXCLUDE=$(echo gabonphotos Downloads Desktop Dropbox Pictures Torrents trash)
+
+# Determine the directories to be backed-up (they are not git and
+# they are not listed in the EXCLUDE variable).
+all=$(ls ~)
+
+for file in $all
+do
+    if echo $EXCLUDE | grep -q -v $file  && ! [ -d $file/.git ] ;
+    then
+        to_archive=$(echo $to_archive $file)
+    fi
+done
+
+echo The following sub-directories of home will be archived together:
+echo $to_archive
+echo The archive name will be:
+echo $tar_name.tar.7z
+echo We have excluded:
+echo $EXCLUDE
+
+read -p "Is this alright? " accept
+
+case "$accept" in
+    n|N ) exit 1 ;;
+    * ) ;;
+esac
+
+# Make up a tar archive of all these directories, and compress the
+# with the 7z utility asking for a password to be given on command
+# line. Delete the tar archive.
+echo Creating archive $tar_name.tar...
+tar cf $tar_name.tar $to_archive
+echo Done.
+
+echo Compressing archive...
+read -p "Please enter a password for the 7z compression: " passwd
+
+7za a $tar_name.tar.7z $tar_name.tar -p$passwd
+rm $tar_name.tar
+
+echo Done.
+
+# If the Dropbox folder has enough space (2GB minus the size of the
+# archive) then move the archive to the Dropbox folder. If not, inform
+# on the free space and exit.
+archive_size=$(stat -c "%s" ~/$tar_name.tar.7z)
+db_space=$(du -sb ~/Dropbox | cut -f 1)
+free_space=$(bc <<< "$DB_MAX - $db_space - $archive_size")
+
+if [ $free_space -lt 0 ]
+then
+    echo There is no space for the archive \($archive_size B\)
+    echo in the Dropbox directory \(already contains $db_space B\)...
+    echo Leaving the archive in home direcroy and exiting.
+    exit 1
+fi
+
+echo Moving the archive \($archive_size B\) to the Dropbox directory...
+mv $tar_name.tar.7z ~/Dropbox/
+echo Done.
+
+echo There is now $free_space B of free space in the Dropbox folder.
