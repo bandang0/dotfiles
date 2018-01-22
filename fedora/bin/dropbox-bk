@@ -10,13 +10,29 @@ DB_MAX=1900000000
 tar_name=home-$HOSTNAME-$(date -u +"%Y%m%d")
 EXCLUDE=$(echo gabonphotos Downloads Desktop Dropbox Pictures Torrents trash)
 
+# Reads passwords twice in case it is misstyped...
+get_check_passwd() {
+    ps1=a
+    ps2=b
+    while [ "$ps1" != "$ps2" ]
+    do
+        echo "Please enter a password for the 7z compression:" >&2
+        read -s ps1
+        echo "Please enter it again:" >&2
+        read -s ps2
+    done
+    echo $ps1
+}
+    
 # Determine the directories to be backed-up (they are not git and
 # they are not listed in the EXCLUDE variable).
+# cd guard to make sure in home directory.
+cd ~
 all=$(ls ~)
 
 for file in $all
 do
-    if echo $EXCLUDE | grep -q -v $file  && ! [ -d $file/.git ] ;
+    if echo $EXCLUDE | grep -q -v $file && [ -d $file ] && ! [ -d $file/.git ]
     then
         to_archive=$(echo $to_archive $file)
     fi
@@ -33,7 +49,6 @@ read -p "Is this alright? " accept
 
 case "$accept" in
     n|N ) exit 1 ;;
-    * ) ;;
 esac
 
 # Make up a tar archive of all these directories, and compress the
@@ -44,7 +59,7 @@ tar cf $tar_name.tar $to_archive
 echo Done.
 
 echo Compressing archive...
-read -p "Please enter a password for the 7z compression: " passwd
+passwd=$(get_check_passwd)
 
 7za a $tar_name.tar.7z $tar_name.tar -p$passwd
 rm $tar_name.tar
@@ -54,7 +69,7 @@ echo Done.
 # If the Dropbox folder has enough space (2GB minus the size of the
 # archive) then move the archive to the Dropbox folder. If not, inform
 # on the free space and exit.
-archive_size=$(stat -c "%s" ~/$tar_name.tar.7z)
+archive_size=$(stat -c "%s" $tar_name.tar.7z)
 db_space=$(du -sb ~/Dropbox | cut -f 1)
 free_space=$(bc <<< "$DB_MAX - $db_space - $archive_size")
 
