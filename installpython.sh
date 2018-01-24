@@ -2,4 +2,4 @@
 
 #Install the usefull python stuff.
 
-pip install --user howdoi tldr astropy
+pip3 install --user howdoi tldr astropy matplotlib
