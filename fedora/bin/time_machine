@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# This script is the interface to the /etc/time_machine file, which
+# keeps track of the time_machine data (names, dates, info, etc.).
+
+
+# Globals
+TM_FILE=~/.time_machine
+TM_HEADER='# Time Machine info file. Use time_machine to handle.'
+
+# Usage
+usage() {
+    echo "Usage: time_machine [COMMAND] [ARGUMENTS]
+COMMANDS: --add               Adds an entry to the time_machine     
+                              with CLI queries.                    
+          --modify NAME       Modifies the entry of NAME.          
+          --dump              Dump the whole file to standard out. 
+          --info NAME         Write the info for NAME to std out."
+
+    exit 0
+}
+
+# Add an entry to the time_machine with CLI queries.
+# Make /etc/time_machine file if it does not exist.
+add_entry() {
+    if ! [ -f $TM_FILE ]
+    then
+        echo $TM_HEADER > $TM_FILE
+    fi
+
+    # Query information.
+    echo Adding entry to Time Machine...
+    read -p 'Name: ' new_name
+    read -p 'Dates: ' new_dates
+    read -p 'Citizenship: ' new_citizenship
+    read -p 'Info: ' new_info
+
+    # Check information
+    echo Name: $new_name
+    echo Dates: $new_dates
+    echo Citizenship: $new_citizenship
+    echo Info: $new_info
+
+    read -p 'Does this look fine?' confirm
+    case "$confirm" in
+        N|n)
+            echo Exiting...
+            exit 0
+            ;;
+        *)
+            echo Writing new entry to file...
+            ;;            
+    esac
+
+    # Write to file
+    echo $new_dates $new_name $new_citizenship $new_info >> $TM_FILE
+}
+
+# Modify an entry by giving a name on command line argument.
+modify_entry() {
+    echo Not implemented, sorry...
+    exit 0
+}
+
+# Dump all info to standard output.
+dump_all() {
+    if ! [ -f $TM_FILE ]
+    then
+        echo There is no Time Machine info file yet!
+        echo Create one with commands --add or --modify.
+        exit 0
+    fi
+    cat $TM_FILE
+    exit 0
+}
+
+# Print info according to name of entry to standard output.
+info_entry() {
+    echo Not implemented, sorry
+    exit 0
+}
+
+# Main program
+case "$1" in
+    "--add")
+        add_entry
+        ;;
+    "--modify")
+        modify_entry $2
+        ;;
+    "--dump")
+        dump_all
+        ;;
+    "--info")
+        info_entry $2
+        ;;
+    *)
+        usage
+        ;;
+esac
+

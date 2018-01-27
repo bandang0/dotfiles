@@ -2,6 +2,3 @@
 
 i3-msg "workspace 10; exec /home/bandang0/.bin/telegram;"
 
-sleep 6 
-
-i3-msg "workspace 1"
