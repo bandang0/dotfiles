@@ -14,4 +14,4 @@ for infile in sys.argv[1:]:
     with fits.open(infile) as fits_file:
         plt.figure(1)
         plt.imshow(fits_file[1].data, aspect = 'auto')
-        plt.savefig(infile.split('/')[-1].split('.fits')[0] + '.png')
+        plt.savefig(infile.split('.fits')[0] + '.png')
