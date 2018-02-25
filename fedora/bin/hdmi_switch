@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Cast the screen and sound to the HDMI output.
+
+if pacmd list-cards | grep 'active profile' | grep analog &> /dev/null; then
+    pacmd set-card-profile 0 output:hdmi-stereo
+    xrandr --output HDMI-1 --auto
+else
+    pacmd set-card-profile 0 output:analog-stereo
+    xrandr --output eDP-1 --auto
+fi

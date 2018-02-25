@@ -1,0 +1,9 @@
+#!/bin/bash
+# Connect to the Bose Mini SoundLink audio device on bluetooth.
+
+# Kill and restart pulseaudio.
+pulseaudio --kill &> /dev/null
+pulseaudio --start
+
+# Connect to device following MAC address.
+echo connect 04:52:C7:53:07:E8 | bluetoothctl

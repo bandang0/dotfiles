@@ -10,10 +10,10 @@ if len(sys.argv) == 1:
     exit(0)
 
 # Process theimages one by one using matplotlib and fits format.
-for infile in sys.argv[1:]:
+for i, infile in enumerate(sys.argv[1:]):
     print("Processing %s..." % infile)
     with fits.open(infile) as fits_file:
-        plt.figure(1)
+        plt.figure(i)
         plt.imshow(fits_file[1].data, aspect = 'auto')
         plt.colorbar()
         plt.savefig(infile.split('.fits')[0] + '.png')

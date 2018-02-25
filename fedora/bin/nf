@@ -2,7 +2,7 @@
 
 # Create an new file with executable bit on.
 
-if [ $1 = " "]
+if [ "$1" == " " ]
 then
     echo -e "Usage: nf FILE"
     exit 1

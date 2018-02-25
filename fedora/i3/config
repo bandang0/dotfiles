@@ -35,7 +35,7 @@ floating_modifier $mod
 bindsym $mod+Return exec urxvt
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -202,7 +202,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -R
 exec_always --no-startup-id i=$(xinput | grep Synaptics | cut -d'=' -f2);xinput set-prop $(echo "${i:0:3}") $(xinput --list-props ${i:0:3} | grep "Tapping Enabled (" | cut -d'(' -f2 | cut -d')' -f1) 1
 
 #HDMI switch
-bindsym control+mod1+h exec /bin/bash /home/bandang0/.bin/hdmi-switch
+bindsym mod+m exec /bin/bash /home/bandang0/.bin/hdmi_switch
 
 # mode launcher for vlc, thunar and firefox
 set $mode_launcher Launch: [f]irefox [n]autilus [v]lc
