@@ -169,6 +169,10 @@ font pango:liberation 9
 #i3lock.sh
 bindsym $mod+z exec sh ~/.i3/i3lock.sh
 
+# Pour le français
+bindsym $mod+p exec setxkbmap -layout us -variant intl
+bindsym $mod+Shift+p exec setxkbmap -layout us
+
 # random wallpaper from directory
 exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/Wallpapers/*
 
@@ -185,7 +189,7 @@ hide_edge_borders smart
 exec --no-startup-id nm-applet
 
 # low battery deamon
-exec --no-startup-id /home/${USER}/.bin/low-batteryd
+exec --no-startup-id /home/${USER}/.bin/low_batteryd
 
 # Dropbox syncing deamon
 exec --no-startup-id dropbox start
@@ -217,5 +221,5 @@ mode "$mode_launcher" {
   bindsym Return mode "default"
 }
 
-#exec --no-startup-id /home/${USER}/.bin/workspace-10
+#exec --no-startup-id /home/${USER}/.bin/workspace_10
 exec_always --no-startup-id i3-msg reload

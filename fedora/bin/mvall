@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Change string in all names matching string in current directory.
+
+if [ $# -ne 2 ]
+then
+    echo "Usage: mvall STRING_TO_REPLACE REPLACEMENT"
+    exit 0
+fi
+
+# Change names.
+for file in $(ls *$1* 2> /dev/null )
+do
+    file_rep=$(echo $file | sed s/$1/$2/g)
+    printf "%s%35s\n" $file $file_rep
+    mv $file $file_rep
+done
