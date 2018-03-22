@@ -7,7 +7,6 @@
 
 # Globals (DB_MAX in bytes).
 DB_MAX=1900000000
-tar_name=home-$HOSTNAME-$(date -u +"%Y%m%d")
 EXCLUDE=$(echo gabonphotos Downloads Desktop Dropbox Pictures Torrents trash)
 
 # Reads passwords twice in case it is misstyped...
@@ -23,28 +22,55 @@ get_check_passwd() {
     done
     echo $ps1
 }
-    
-# Determine the directories to be backed-up (they are not git and
-# they are not listed in the EXCLUDE variable).
+
+# Run with at most one argument.
+if [ $# -ge 2 ]
+then
+    echo 'Usage: dropbox_bk [DIRECTORY]'
+    exit 0
+fi
+
 # cd guard to make sure in home directory.
-cd ~
+if [ $(pwd) != ~ ]
+then
+    echo Please move to home directory to run this script.
+    exit 1
+fi
+
+# Determine the directories to be backed-up (listed on command line
+# or they are not git and they are not listed in the EXCLUDE variable).
 all=$(ls ~)
+if [ $# -eq 0 ]
+then
+    # All dirs in home not git and not in $EXCLUDE.
+    all=$(ls ~)
+    for file in $all
+    do
+        if echo $EXCLUDE | grep -q -v $file && [ -d $file ] \
+           && ! [ -d $file/.git ]
+        then
+            to_archive=$(echo $to_archive $file)
+        fi
+    done
+    tar_name=home-$(date +"%y%m%d")
+else
+    # Dir read from command line.
+    to_archive=$1
+    tar_name=$1
+fi
 
-for file in $all
-do
-    if echo $EXCLUDE | grep -q -v $file && [ -d $file ] && ! [ -d $file/.git ]
-    then
-        to_archive=$(echo $to_archive $file)
-    fi
-done
-
+# Report archiving params.
 echo The following sub-directories of home will be archived together:
 echo $to_archive
 echo The archive name will be:
 echo $tar_name.tar.7z
-echo We have excluded:
-echo $EXCLUDE
+if [ $# -eq 0 ]
+then
+    echo We have excluded:
+    echo $EXCLUDE
+fi
 
+# Check before proceeding.
 read -p "Is this alright? " accept
 
 case "$accept" in
