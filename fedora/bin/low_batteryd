@@ -15,9 +15,7 @@ _alarm() {
 
 # Produces the warning tone.
 _warn_low_battery() {
-  _alarm 200 1 &> /dev/null
-  _alarm 400 1 &> /dev/null
-  _alarm 800 1 &> /dev/null
+  _alarm 300 1 &> /dev/null
 }
 
 # Infinite loop which check the battery level periodically and warns
