@@ -1,24 +1,3 @@
-servers = (
-  {
-    address = "irc.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    use_tls = "no";
-    tls_verify = "no";
-    autoconnect = "yes";
-  }
-);
-
-chatnets = {
-  Freenode = {
-    type = "IRC";
-    autosendcmd = "/join #arcs-os";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-};
-
 aliases = {
   ATAG = "WINDOW SERVER";
   ADDALLCHANS = "SCRIPT EXEC foreach my \\$channel (Irssi::channels()) { Irssi::command(\"CHANNEL ADD -auto \\$channel->{name} \\$channel->{server}->{tag} \\$channel->{key}\")\\;}";
@@ -175,19 +154,12 @@ statusbar = {
       placement = "top";
       position = "1";
       visible = "always";
-
-      items = {
-        topicbarstart = { priority = "100"; };
-        topic = { };
-        topic_empty = { };
-        topicbarend = { priority = "100"; alignment = "right"; };
-      };
     };
   };
 };
 settings = {
   core = {
-    real_name = "Unknown";
+    real_name = "bandang0";
     user_name = "bandang0";
     nick = "bandang0";
   };

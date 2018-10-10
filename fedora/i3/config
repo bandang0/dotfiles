@@ -170,7 +170,7 @@ font pango:liberation 9
 bindsym $mod+z exec sh ~/.i3/i3lock.sh
 
 # screenshot!
-bindsym $mod+k gnome-screenshot -a
+bindsym $mod+g exec gnome-screenshot -a
 
 # Pour le français
 bindsym $mod+p exec setxkbmap -layout us -variant intl
@@ -205,11 +205,13 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pk
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks
 
-#tap-click
+#tap-click and mouse-speed
 exec_always --no-startup-id i=$(xinput | grep Synaptics | cut -d'=' -f2);xinput set-prop $(echo "${i:0:3}") $(xinput --list-props ${i:0:3} | grep "Tapping Enabled (" | cut -d'(' -f2 | cut -d')' -f1) 1
+exec_always xinput --set-prop 11 297 0.7
 
-#HDMI switch
-bindsym mod+m exec /bin/bash /home/bandang0/.bin/hdmi_switch
+# VGA switch
+bindsym $mod+m exec xrandr --output DP-1 --auto --above eDP-1
+bindsym $mod+Shift+m exec xrandr --output DP-1 --off
 
 # mode launcher for vlc, thunar and firefox
 set $mode_launcher Launch: [f]irefox [n]autilus [v]lc
