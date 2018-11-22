@@ -14,8 +14,14 @@ else
   export PS1='\u@\h:\w\$ '
 fi
 
-# Path
-export PATH=/home/bandang0/.bin:/home/bandang0/.local/bin:$PATH
+# Path (notice the change for macOS)
+if [ $(uname) = Darwin ]; then
+    PYBINPATH=$HOME/Library/Python/3.7/bin
+else
+    PYBINPATH=$HOME/.local/bin
+fi
+
+export PATH=$HOME/.bin:$PYBINPATH:$PATH
 
 # GDL path
 export GDL_STARTUP=~/.gdl/gdlrc
