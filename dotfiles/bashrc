@@ -25,3 +25,7 @@ export PATH=$HOME/.bin:$PYBINPATH:$PATH
 
 # GDL path
 export GDL_STARTUP=~/.gdl/gdlrc
+
+# Locale stuff
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8

@@ -14,7 +14,7 @@ for i, infile in enumerate(sys.argv[1:]):
     print("Processing %s..." % infile)
     with fits.open(infile) as fits_file:
         plt.figure(i)
-        plt.imshow(fits_file[0].data, aspect = 'auto')
+        plt.imshow(fits_file[0].data, aspect='auto', origin='lower')
         plt.colorbar()
-        plt.savefig(infile.split('.fits')[0] + '.png')
+        plt.savefig(infile.split('.fits')[0] + '.png', bbox_inches='tight')
     print("Done.")
