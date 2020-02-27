@@ -1,3 +1,5 @@
 [user]
-	email = bandang0@yahoo.com
-	name = bandang0
+	email = <bandang0@yahoo.com>
+	name = Raphaël Duque
+[commit]
+	gpgsign = false

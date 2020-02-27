@@ -5,15 +5,15 @@ from glob import glob
 from astropy.io import fits
 from numpy import min, max, mean
 
-print("{:25} : {:>7} {:12} : {:>9} {:>9} {:>9}".format("NAME", "EXP", "FILTER", 
+print("{:25} : {:>7} {:12} : {:>9} {:>9} {:>9}".format("NAME", "EXP", "FILTER",
     "MIN", "MEAN", "MAX"))
 for ffile in sorted(glob("*.fit*")):
     head = fits.getheader(ffile)
-    exp = head['EXPTIME']
-    fil = head['FILTER']
+    exp = head.get('EXPTIME', -1.)
+    fil = head.get('FILTER', 'None')
     data = fits.getdata(ffile)
     mini = min(data)
     maxi = max(data)
     mid = mean(data)
-    print(f"{ffile:25} : {exp:6.1f}s {fil:12} : "
+    print(f"{ffile:25} : {exp:6}s {fil:12} : "
           f"{mini:9.1f} {mid:9.1f} {maxi:9.1f}")

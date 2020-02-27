@@ -16,7 +16,8 @@ fi
 
 # Path (notice the change for macOS)
 if [ $(uname) = Darwin ]; then
-    PYBINPATH=$HOME/Library/Python/3.7/bin
+    PYBINPATH=$HOME/Library/Python/3.8/bin
+    PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
 else
     PYBINPATH=$HOME/.local/bin
 fi
