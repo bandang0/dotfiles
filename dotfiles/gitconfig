@@ -1,5 +1,11 @@
 [user]
-	email = <bandang0@yahoo.com>
+	email = <duque@iap.fr>
 	name = Raphaël Duque
 [commit]
 	gpgsign = false
+[sendemail]
+	smtpserver = smtp.iap.fr
+	smtpserverport = 465
+	smtpencryption = ssl
+	smtpuser = duque
+	confirm = auto
